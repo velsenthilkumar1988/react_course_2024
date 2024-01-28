@@ -72,3 +72,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Guidelines Master Link:
 https://www.youtube.com/watch?v=-dqglen-49M&list=PL0JfpSrXxTMze550NuQHylnUsW-6-7KrQ&index=2
+
+website links:
+--------
+https://create-react-app.dev/docs/getting-started/
+https://babeljs.io/
