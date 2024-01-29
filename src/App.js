@@ -1,16 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import ClassBasedComponents from './Components/ClassBasedComponents';
-import FunctionalBasedComponents from './Components/FunctionalBasedComponents';
+//should start with arrow function
+//components
 
-function App() {
-  return (
+import "./App.css";
+import Homepage from "./pages/homepage";
+function App(){
+  return(
     <div className="App">
-      Heelo App
-      <ClassBasedComponents/>
-      <FunctionalBasedComponents/>
+      <Homepage/>
     </div>
-  );
+  ) 
 }
-
 export default App;

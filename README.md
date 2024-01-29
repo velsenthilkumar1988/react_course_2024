@@ -77,3 +77,8 @@ website links:
 --------
 https://create-react-app.dev/docs/getting-started/
 https://babeljs.io/
+
+https://spoonacular.com/food-api/console#Dashboard
+
+Daily Time Schedule:
+Date : 29-01-2024 - Time : check in for 6.30PM & check out 9.50PM (video time 00:00 to 37:12)

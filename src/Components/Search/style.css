@@ -1,0 +1,33 @@
+.search_home_page{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: column;
+}
+.Form_Search{
+    display: flex;
+}
+.Form_Search > input{
+    padding: 10px 5px;
+    margin: 5px;
+}
+.Form_Search > button{
+    padding: 10px;
+    margin: 10px 20px;
+    background-color: cadetblue;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+
+}
+.Form_Search > button:hover{
+    padding: 10px;
+    margin: 10px 20px;
+    background-color: sienna ;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
