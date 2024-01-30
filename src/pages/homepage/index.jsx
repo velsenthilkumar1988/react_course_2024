@@ -54,11 +54,11 @@ const Homepage = () => {
     }
   };
 
-  const RemoveToFavourites = (getCurrentRecipeItem)=>{
-    let cpyFavourite = [...favouritesVal];
-    const cpyFavourite2 = cpyFavourite.filter((item)=> item.id !== getCurrentRecipeItem);
-    setFavouritesVal(cpyFavourite2);
-    localStorage.setItem('favorites', JSON.stringify(cpyFavourite2));
+  const RemoveToFavourites = (getCurrentId)=>{
+    let cpyFavouriteval2 = [...favouritesVal];
+    cpyFavouriteval2 = cpyFavouriteval2.filter((item)=> item.id !== getCurrentId);
+    setFavouritesVal(cpyFavouriteval2);
+    localStorage.setItem('favorites', JSON.stringify(cpyFavouriteval2));
   };
 
   useEffect(()=>{
