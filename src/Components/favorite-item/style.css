@@ -1,0 +1,46 @@
+.favour-wrapper{
+    flex-direction: column;
+    display: flex;
+}
+.favour-items{
+    border: 1px solid orange;
+    padding: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(250,100,0,1);
+    background-color: beige;
+}
+.favour-items > img{
+    width: 100%;
+    height: 90%;
+    padding: 10px;
+}
+
+.favour-items >p{
+    color: rgb(21, 21, 20);
+    font-weight: 700;
+    font-size: 20px;
+    margin: 12px 0 12px 0px;
+    font-weight: 500;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.favour-items >button{
+    background-color: chocolate;
+    border: 1px solid transparent;
+    padding: 10px;
+    margin: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.favour-items >button:hover{
+    background-color: blueviolet;
+    border: 1px solid transparent;
+    padding: 10px;
+    margin: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import SearchHomePage from "../../Components/Search";
 import "./style.css";
 import RecipeItem from "../../Components/recipe-item";
+import favoriteItemPage from "../../Components/favorite-item";
+import FavourRecipeItem from "../../Components/favorite-item";
 const dummydata = "dummydata";
 const Homepage = () => {
   //loading state
@@ -11,6 +13,7 @@ const Homepage = () => {
   const [receipes, setReceipes] = useState([]);
   //favourite state will be loading
   const [favouritesVal, setFavouritesVal] = useState([]);
+  
   const getDataFromSearchComponent = (getData) => {
     console.log(getData, "getData Value");
     //keep loading state as true before we are calling true
@@ -64,8 +67,21 @@ const Homepage = () => {
       />
 
       {/**fovourite item loading */}  
-      <div className="favorite_wrapper">
-            
+      <div className="favour-wrapper">
+            <h1 className="favour-title">Favorite Title</h1>
+            <div className="favour-items">
+            {favouritesVal && favouritesVal.length > 0
+            ? favouritesVal.map((item) => (
+                //favoriteItemPage
+                <FavourRecipeItem
+                id={item.id}
+                image={item.image}
+                title={item.title}
+                />
+              ))
+            : null}
+            </div>
+
       </div>  
       {/**fovourite item loading */}  
 
