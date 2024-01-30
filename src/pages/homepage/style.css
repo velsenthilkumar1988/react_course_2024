@@ -7,6 +7,19 @@
 .favorite_wrapper{
     flex-direction: column;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.favour-items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
 }
 .favourites{
     display: flex;

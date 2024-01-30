@@ -11,6 +11,8 @@ const Homepage = () => {
 
   //save result that we received from api
   const [receipes, setReceipes] = useState([]);
+
+  
   //favourite state will be loading
   const [favouritesVal, setFavouritesVal] = useState([]);
   
@@ -52,6 +54,13 @@ const Homepage = () => {
     }
   };
 
+  const RemoveToFavourites = (getCurrentRecipeItem)=>{
+    let cpyFavourite = [...favouritesVal];
+    const cpyFavourite2 = cpyFavourite.filter((item)=> item.id !== getCurrentRecipeItem);
+    setFavouritesVal(cpyFavourite2);
+    localStorage.setItem('favorites', JSON.stringify(cpyFavourite2));
+  };
+
   useEffect(()=>{
     console.log('lets play only one time on page load');
     const extractFovoriteFromLocalStorageOnPageLoad = JSON.parse(localStorage.getItem('favorites'));
@@ -74,6 +83,7 @@ const Homepage = () => {
             ? favouritesVal.map((item) => (
                 //favoriteItemPage
                 <FavourRecipeItem
+                RemoveToFavourites = {()=> RemoveToFavourites(item)}
                 id={item.id}
                 image={item.image}
                 title={item.title}

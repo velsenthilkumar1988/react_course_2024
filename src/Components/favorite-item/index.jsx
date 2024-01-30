@@ -1,7 +1,7 @@
 import "./style.css";
 
 const FavourRecipeItem = (props)=>{
-    const {id,image,title} = props;
+    const {id,image,RemoveFromFavour,title} = props;
 
     console.log(props,'receipes items are there')
     
@@ -11,7 +11,7 @@ const FavourRecipeItem = (props)=>{
                 <img src={image} alt="image of recipes"/>
             </div>
             <p>{title}</p>
-            <button type="button" >Remove to Favourites</button>
+            <button type="button" onClick={RemoveFromFavour}>Remove to Favourites</button>
         </div>
     )
 }
