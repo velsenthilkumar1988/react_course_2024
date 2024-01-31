@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import SearchHomePage from "../../Components/Search";
 import "./style.css";
 import RecipeItem from "../../Components/recipe-item";
-import favoriteItemPage from "../../Components/favorite-item";
 import FavourRecipeItem from "../../Components/favorite-item";
 const dummydata = "dummydata";
 const Homepage = () => {
@@ -12,10 +11,9 @@ const Homepage = () => {
   //save result that we received from api
   const [receipes, setReceipes] = useState([]);
 
-  
   //favourite state will be loading
   const [favouritesVal, setFavouritesVal] = useState([]);
-  
+
   const getDataFromSearchComponent = (getData) => {
     console.log(getData, "getData Value");
     //keep loading state as true before we are calling true
@@ -42,31 +40,37 @@ const Homepage = () => {
     console.log(getCurrentRecipeItem);
     let cpyFavouriteVal = [...favouritesVal];
 
-    const index = cpyFavouriteVal.findIndex(item=> item.id === getCurrentRecipeItem.id)
+    const index = cpyFavouriteVal.findIndex(
+      (item) => item.id === getCurrentRecipeItem.id
+    );
     console.log(index);
-    if(index === -1){
-        cpyFavouriteVal.push(getCurrentRecipeItem)
-        setFavouritesVal(cpyFavouriteVal)
-        //save the local storage in favourit items
-        localStorage.setItem('favorites', JSON.stringify(cpyFavouriteVal))
-    }else{
-        alert('Item is Already inserted in Favourites')
+    if (index === -1) {
+      cpyFavouriteVal.push(getCurrentRecipeItem);
+      setFavouritesVal(cpyFavouriteVal);
+      //save the local storage in favourit items
+      localStorage.setItem("favorites", JSON.stringify(cpyFavouriteVal));
+    } else {
+      alert("Item is Already inserted in Favourites");
     }
   };
 
-  const RemoveToFavourites = (getCurrentId)=>{
-    let cpyFavouriteval2 = [...favouritesVal];
-    cpyFavouriteval2 = cpyFavouriteval2.filter((item)=> item.id !== getCurrentId);
-    setFavouritesVal(cpyFavouriteval2);
-    localStorage.setItem('favorites', JSON.stringify(cpyFavouriteval2));
+  const RemoveFromFavour = (getCurrentId) => {
+    let cpyFavouriteVal = [...favouritesVal];
+    cpyFavouriteVal = cpyFavouriteVal.filter(
+      (item) => item.id !== getCurrentId
+    );
+    setFavouritesVal(cpyFavouriteVal);
+    localStorage.setItem("favorites", JSON.stringify(cpyFavouriteVal));
   };
 
-  useEffect(()=>{
-    console.log('lets play only one time on page load');
-    const extractFovoriteFromLocalStorageOnPageLoad = JSON.parse(localStorage.getItem('favorites'));
+  useEffect(() => {
+    console.log("lets play only one time on page load");
+    const extractFovoriteFromLocalStorageOnPageLoad = JSON.parse(
+      localStorage.getItem("favorites")
+    );
     setFavouritesVal(extractFovoriteFromLocalStorageOnPageLoad);
+  }, []);
 
-  },[])
 
   return (
     <div className="homepage">
@@ -75,25 +79,24 @@ const Homepage = () => {
         dummydatavalue={dummydata}
       />
 
-      {/**fovourite item loading */}  
+      {/**fovourite item loading */}
       <div className="favour-wrapper">
-            <h1 className="favour-title">Favorite Title</h1>
-            <div className="favour-items">
-            {favouritesVal && favouritesVal.length > 0
+        <h1 className="favour-title">Favorite Title</h1>
+        <div className="favour-items">
+          {favouritesVal && favouritesVal.length > 0
             ? favouritesVal.map((item) => (
                 //favoriteItemPage
                 <FavourRecipeItem
-                RemoveToFavourites = {()=> RemoveToFavourites(item)}
-                id={item.id}
-                image={item.image}
-                title={item.title}
+                  RemoveFromFavour={() => RemoveFromFavour(item.id)}
+                  id={item.id}
+                  image={item.image}
+                  title={item.title}
                 />
               ))
             : null}
-            </div>
-
-      </div>  
-      {/**fovourite item loading */}  
+        </div>
+      </div>
+      {/**fovourite item loading */}
 
       {/**show loading state */}
       {loadingState && (
@@ -106,7 +109,7 @@ const Homepage = () => {
         {receipes && receipes.length > 0
           ? receipes.map((item) => (
               <RecipeItem
-                addToFavourites={()=>addToFavourites(item)}
+                addToFavourites={() => addToFavourites(item)}
                 id={item.id}
                 image={item.image}
                 title={item.title}
