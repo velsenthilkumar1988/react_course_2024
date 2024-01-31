@@ -1,4 +1,4 @@
-.loading{
+.loading, .no-items{
     font-size: 40px;
     text-transform: uppercase;
     font-weight: bold;

@@ -83,3 +83,4 @@ https://spoonacular.com/food-api/console#Dashboard
 Daily Time Schedule:
 Date : 29-01-2024 - Time : check in for 6.30PM & check out 9.50PM (video time 00:00 to 37:12)
 Date : 30-01-2024 - Time : check in for 6.30PM & check out 9.50PM (video time 34:12 to 1:06:12)
+Date : 31-01-2024 - Time : check in for 6.30PM & check out  (video time 1:06:12 to )

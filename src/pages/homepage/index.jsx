@@ -1,9 +1,26 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
 import SearchHomePage from "../../Components/Search";
 import "./style.css";
 import RecipeItem from "../../Components/recipe-item";
 import FavourRecipeItem from "../../Components/favorite-item";
 const dummydata = "dummydata";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "filter_favourites":
+      console.log(action);
+      return {
+        ...state,
+        filteredValue: action.value,
+      };
+
+    default:
+      return state;
+  }
+};
+const initialState = {
+  filteredValue: "",
+};
 const Homepage = () => {
   //loading state
   const [loadingState, setloadingState] = useState(false);
@@ -13,6 +30,12 @@ const Homepage = () => {
 
   //favourite state will be loading
   const [favouritesVal, setFavouritesVal] = useState([]);
+
+  //state for api is successfully or not
+  const [apiCalledSuccess, setApiCalledSuccess] = useState(false);
+
+  //use reduce functionallity
+  const [FilteredState, dispatch] = useReducer(reducer, initialState);
 
   const getDataFromSearchComponent = (getData) => {
     console.log(getData, "getData Value");
@@ -31,12 +54,13 @@ const Homepage = () => {
       if (results && results.length > 0) {
         setloadingState(false);
         setReceipes(results);
+        setApiCalledSuccess(true);
       }
     }
     getReceipes();
   };
   console.log(setloadingState, receipes);
-  const addToFavourites = (getCurrentRecipeItem) => {
+  const addToFavourites = useCallback((getCurrentRecipeItem)=>{
     console.log(getCurrentRecipeItem);
     let cpyFavouriteVal = [...favouritesVal];
 
@@ -49,10 +73,28 @@ const Homepage = () => {
       setFavouritesVal(cpyFavouriteVal);
       //save the local storage in favourit items
       localStorage.setItem("favorites", JSON.stringify(cpyFavouriteVal));
+      window.scrollTo({top: '0', behavior: 'smooth'})
     } else {
       alert("Item is Already inserted in Favourites");
     }
-  };
+  },[favouritesVal])
+  // const addToFavourites = (getCurrentRecipeItem) => {
+  //   console.log(getCurrentRecipeItem);
+  //   let cpyFavouriteVal = [...favouritesVal];
+
+  //   const index = cpyFavouriteVal.findIndex(
+  //     (item) => item.id === getCurrentRecipeItem.id
+  //   );
+  //   console.log(index);
+  //   if (index === -1) {
+  //     cpyFavouriteVal.push(getCurrentRecipeItem);
+  //     setFavouritesVal(cpyFavouriteVal);
+  //     //save the local storage in favourit items
+  //     localStorage.setItem("favorites", JSON.stringify(cpyFavouriteVal));
+  //   } else {
+  //     alert("Item is Already inserted in Favourites");
+  //   }
+  // };
 
   const RemoveFromFavour = (getCurrentId) => {
     let cpyFavouriteVal = [...favouritesVal];
@@ -71,20 +113,58 @@ const Homepage = () => {
     setFavouritesVal(extractFovoriteFromLocalStorageOnPageLoad);
   }, []);
 
+  const filteredFavouritesItem = favouritesVal.filter((item) =>
+    item.title.toLowerCase().includes(FilteredState.filteredValue)
+  );
+
+  const renderRecipes = useCallback(()=>{
+    if(receipes && receipes.length >0)
+    {
+      return(
+        receipes.map((item) => (
+          <RecipeItem
+            addToFavourites={() => addToFavourites(item)}
+            id={item.id}
+            image={item.image}
+            title={item.title}
+          />
+      ))
+      )
+    }
+  },[receipes,addToFavourites])
 
   return (
     <div className="homepage">
       <SearchHomePage
         getDataFromSearchComponent={getDataFromSearchComponent}
         dummydatavalue={dummydata}
+        apiCalledSuccess={apiCalledSuccess}
+        setApiCalledSuccess={setApiCalledSuccess}
       />
 
       {/**fovourite item loading */}
       <div className="favour-wrapper">
         <h1 className="favour-title">Favorite Title</h1>
+
+        {/** set favour search option*/}
+        <div className="search_favour">
+          <input
+            value={FilteredState.filteredValue}
+            name="searchfavorites"
+            onChange={(event) =>
+              dispatch({ type: "filter_favourites", value: event.target.value })
+            }
+            placeholder="Search Favourites Items"
+          />
+        </div>
+        {/** set favour search option*/}
+
         <div className="favour-items">
-          {favouritesVal && favouritesVal.length > 0
-            ? favouritesVal.map((item) => (
+          {
+            !filteredFavouritesItem.length && <div className="no-items">No Favorites are Found!!!</div>
+          }
+          {filteredFavouritesItem && filteredFavouritesItem.length > 0
+            ? filteredFavouritesItem.map((item) => (
                 //favoriteItemPage
                 <FavourRecipeItem
                   RemoveFromFavour={() => RemoveFromFavour(item.id)}
@@ -106,7 +186,25 @@ const Homepage = () => {
 
       {/**Map through all the receipes */}
       <div className="items">
-        {receipes && receipes.length > 0
+        {/* {
+          renderRecipes()
+        } */}
+
+        {
+          useMemo(()=>
+              !loadingState && receipes && receipes.length > 0 
+              ? receipes.map((item) => (
+              <RecipeItem
+                addToFavourites={() => addToFavourites(item)}
+                id={item.id}
+                image={item.image}
+                title={item.title}
+              />
+              )): null,
+          [loadingState, receipes, addToFavourites])
+        }
+
+        {/* {receipes && receipes.length > 0
           ? receipes.map((item) => (
               <RecipeItem
                 addToFavourites={() => addToFavourites(item)}
@@ -115,10 +213,13 @@ const Homepage = () => {
                 title={item.title}
               />
             ))
-          : null}
+          : null} */}
       </div>
 
       {/**Map through all the receipes */}
+      {
+        !loadingState && !receipes.length && <div className="no-items">No Receipes are there ????</div>
+      }
     </div>
   );
 };
