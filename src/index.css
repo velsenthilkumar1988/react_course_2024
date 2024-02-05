@@ -1,13 +1,99 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Andika:ital,wght@1,700&display=swap');
+*{
+box-sizing: border-box;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+  font-family: "Andika", sans-serif;
+}
+#root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  margin: 0;
+}
+h3{
+  margin: 10px 0;
+}
+h6{
+  margin: 5px 0;
+  text-transform: uppercase;
+}
+p{
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+}
+.card-container{
+  background-color: blanchedalmond;
+  border-radius: 10px;
+  margin: 10px;
+  max-width: 100%;
+  padding: 15px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 330px;
+  position: relative;
+  display: inline-block;
+  
+}
+.pro{
+  position: absolute;
+  background-color: brown;
+  color: white;
+  border-radius: 3px;
+  padding: 3px 7px;
+  top: 30px;
+  left: 30px;
+  text-shadow: antiquewhite;
+}
+.onLine{
+  background-color: greenyellow;
+}
+.offLine{
+  background-color: blueviolet;
+}
+.img{
+  border: 3px solid yellow;
+  border-radius: 50%;
+  padding: 7px;
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.buttons > .primary{
+  background-color: blue;
+  color: bisque;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.buttons > .outline{
+  background-color: transparent;
+  color: black;
+}
+.skills{
+  background-color:bisque;
+  text-align: left;
+  padding: 15px;
+  margin-top: 15px;
+}
+.skills > ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.skills > ul > li{
+  border: 1px solid grey;
+  display: inline-block;
+  padding: 7px;
+  border-radius: 2px;
+  margin: 0 7px 7px 0;
 }
